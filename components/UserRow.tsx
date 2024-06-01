@@ -18,7 +18,7 @@ export const UserRow = (user: UserRowProps) => {
   return (
     <div className="border-b hover:bg-orange-100 bg-gray-100">
       <Formik
-        initialValues={{ email: user.email, fullname: user.name, password: "" }}
+        initialValues={{ email: user.email, fullname: user.fullname, role: user.role }}
         validationSchema={SignupSchema}
         onSubmit={(values, { setSubmitting }) => {
           console.log(values)

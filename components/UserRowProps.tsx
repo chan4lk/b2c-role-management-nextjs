@@ -1,5 +1,5 @@
 export interface UserRowProps {
-  name: string;
+  fullname: string;
   email: string;
   role: string;
 }
