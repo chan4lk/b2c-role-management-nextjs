@@ -2,7 +2,6 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { SaveButton } from "./SaveButton";
 import { DeleteButton } from "./DeleteButton";
-import { UserRowProps } from "./UserRowProps";
 import * as Yup from 'yup';
 const SignupSchema = Yup.object().shape({
   fullname: Yup.string()
@@ -20,12 +19,18 @@ export const UserRow = (user: User) => {
       <Formik
         initialValues={{ email: user.userPrincipalName, fullname: user.displayName, role: 'user' }}
         validationSchema={SignupSchema}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={async (values, { setSubmitting }) => {
           console.log(values)
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+          const res = await fetch('http://localhost:3000/api/users', {
+            method: 'PATCH',
+            body: JSON.stringify({
+              email: user.userPrincipalName, 
+              displayName: values.fullname,
+              role: values.role})
+          })
+          const data = await res.json();
+          console.log(data)
+          setSubmitting(false);
         }}
       >
         {({ isSubmitting, handleSubmit, submitForm, errors }) => (
