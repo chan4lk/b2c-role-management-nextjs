@@ -2,7 +2,7 @@ import { UserRow } from "@/components/UserRow";
 
 export default async function Home() {
   const res = await fetch('http://localhost:3000/api/users');
-  const users: { data: Array<{name: string, email: string, role: string}> } = await res.json();
+  const users: { data: Array<{fullname: string, email: string, role: string}> } = await res.json();
   return (
     <div className="text-gray-900 bg-gray-200 h-screen">
       <div className="p-4 flex">
