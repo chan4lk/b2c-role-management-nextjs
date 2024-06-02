@@ -13,12 +13,12 @@ const SignupSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
 });
 
-export const UserRow = (user: UserRowProps) => {
+export const UserRow = (user: User) => {
   const save = () => {};
   return (
     <div className="border-b hover:bg-orange-100 bg-gray-100">
       <Formik
-        initialValues={{ email: user.email, fullname: user.fullname, role: user.role }}
+        initialValues={{ email: user.userPrincipalName, fullname: user.displayName, role: 'user' }}
         validationSchema={SignupSchema}
         onSubmit={(values, { setSubmitting }) => {
           console.log(values)
@@ -29,9 +29,9 @@ export const UserRow = (user: UserRowProps) => {
         }}
       >
         {({ isSubmitting, handleSubmit, submitForm, errors }) => (
-          <Form onSubmit={handleSubmit} className="grid grid-cols-4 gap-4">
-            <div className="p-3 px-5">
-              <Field type="email" name="email" />
+          <Form onSubmit={handleSubmit} className="grid grid-cols-5 gap-4">
+            <div className="p-3 px-5 grid col-span-2">
+              <Field type="email" name="email" className="w-full"/>
               <ErrorMessage name="email" component="div" />
             </div>
             <div className="p-3 px-5">

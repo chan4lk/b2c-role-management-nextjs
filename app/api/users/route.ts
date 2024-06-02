@@ -1,8 +1,8 @@
-export async function GET() {
+import { createGraphClient } from "../graph-provider/GraphClient";
 
-    const data = [
-        { fullname: 'Chandima Ranaweera', email: 'chandima@b2cdevroles.onmicrosoft.com', role: 'admin' },
-        { fullname: '', email: '', role: '' },
-    ];
-    return Response.json({ data })
+export async function GET() {
+    const client = createGraphClient();
+    const res = await client.api("/users/").get();
+    console.log(res.value);
+    return Response.json({ data: res.value })
 }
