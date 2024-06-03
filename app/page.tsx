@@ -1,3 +1,4 @@
+import { SignIn } from "@/components/SignIn";
 import { UserRow } from "@/components/UserRow";
 
 export default async function Home() {
@@ -5,8 +6,9 @@ export default async function Home() {
   const users: { data: Array<User> } = await res.json();
   return (
     <div className="text-gray-900 bg-gray-200 h-screen">
-      <div className="p-4 flex">
+      <div className="p-4 grid grid-cols-2 gap-4">
         <h1 className="text-3xl">Users</h1>
+        <SignIn />
       </div>
       <div className="px-3 py-4 flex justify-center">
         <div className="w-full text-md bg-white shadow-md rounded mb-4">
